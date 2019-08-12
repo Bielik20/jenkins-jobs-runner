@@ -81,7 +81,7 @@
     "boxen": "^4.1.0",
     "chalk": "^2.4.2",
     "jenkins": "^0.26.0",
-    "jenkins-rxjs": "^0.0.0",
+    "jenkins-rxjs": "1.0.0",
     "log-symbols": "^3.0.0",
     "multi-progress": "^2.0.0",
     "progress": "^2.0.3",

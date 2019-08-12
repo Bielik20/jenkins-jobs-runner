@@ -98,7 +98,7 @@ const UMDconfig = {
     sourcemap: true,
   },
   plugins: removeEmpty(
-    /** @type {Plugin[]} */ ([...plugins, ifProduction(uglify())]),
+    /** @type {Plugin[]} */ ([...plugins, ifProduction(terser())]),
   ),
 };
 

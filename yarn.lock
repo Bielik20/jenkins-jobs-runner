@@ -3549,10 +3549,13 @@ istanbul-reports@^1.5.1:
   dependencies:
     handlebars "^4.0.3"
 
-jenkins-rxjs@^0.0.0:
-  version "0.0.0"
-  resolved "https://registry.yarnpkg.com/jenkins-rxjs/-/jenkins-rxjs-0.0.0.tgz#acd40ed0d2dc55550e6fbc3b7a98a27e6932ac2d"
-  integrity sha512-a/0O84+Niyn+e029irPsiw/BGUWbxBOB0jO5t1PV/meLNQeuCXB1+b2XOw8Xc5TVz0fkRN+L7yoNyRT7mAeD8g==
+jenkins-rxjs@1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/jenkins-rxjs/-/jenkins-rxjs-1.0.0.tgz#33d788480b9a7a6f978d7a8d95c767ffac5fe498"
+  integrity sha512-Cygge8zrjo9mn3Otaq7hD+T1Z7dYZW9/Gn0Gh7htET9+6IeBqp4lMhYnAfP0b26Ae3LWlrVba6EzDSuyLeCvgQ==
+  dependencies:
+    jenkins "^0.26.0"
+    rxjs "^6.5.2"
 
 jenkins@^0.26.0:
   version "0.26.0"
