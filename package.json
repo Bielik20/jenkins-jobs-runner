@@ -64,13 +64,19 @@
     }
   },
   "lint-staged": {
-    "**/*.{ts,tsx,js,jsx,css,scss,sass,less,md}": [
-      "prettier --write",
-      "git add"
-    ],
-    "src/**/*.{ts,tsx}": [
-      "npm run lint:fix",
-      "git add"
+    "linters": {
+      "*.ts": [
+        "prettier --write",
+        "tslint --fix",
+        "git add"
+      ],
+      "*.{json,js,md}": [
+        "prettier --write",
+        "git add"
+      ]
+    },
+    "ignore": [
+      "**/dist/**/*"
     ]
   },
   "peerDependencies": {
@@ -80,6 +86,7 @@
     "ansi-escapes": "^4.2.1",
     "boxen": "^4.1.0",
     "chalk": "^2.4.2",
+    "inquirer": "^6.2.2",
     "jenkins": "^0.26.0",
     "jenkins-rxjs": "1.0.0",
     "log-symbols": "^3.0.0",
@@ -90,6 +97,7 @@
   "devDependencies": {
     "@commitlint/cli": "7.2.1",
     "@commitlint/config-conventional": "7.1.2",
+    "@types/inquirer": "^6.0.0",
     "@types/jenkins": "0.23.1",
     "@types/jest": "23.3.10",
     "@types/multi-progress": "2.0.3",

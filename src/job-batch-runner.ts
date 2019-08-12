@@ -1,3 +1,4 @@
+import * as inquirer from 'inquirer';
 import { JenkinsRxJs, JobDone, JobResponse } from 'jenkins-rxjs';
 import { combineLatest, Observable } from 'rxjs';
 import { last, takeUntil } from 'rxjs/operators';
@@ -20,7 +21,11 @@ export class JobBatchRunner {
       );
 
       uiManager.printBatchFooter(results);
-      this.ensureSuccess(results, uiManager);
+      await this.ensureSuccess(
+        results,
+        uiManager,
+        jobBatchDescriptors[jobBatchDescriptors.length - 1] === batchDescriptor,
+      );
     }
   }
 
@@ -49,14 +54,32 @@ export class JobBatchRunner {
     return stream$.pipe(last()) as Observable<JobDone>;
   }
 
-  private ensureSuccess(results: JobDone[], uiManager: UiManager): void {
+  private async ensureSuccess(
+    results: JobDone[],
+    uiManager: UiManager,
+    isLast: boolean,
+  ): Promise<void> {
     const failures: JobDone[] = results.filter(
       (result: JobDone) => result.status === 'FAILURE',
     );
 
     if (failures.length) {
       uiManager.printBatchError(failures);
-      process.exit(1);
+
+      if (!isLast) {
+        const question: inquirer.Question = {
+          name: 'proceed',
+          type: 'confirm',
+          message: 'Do you want to continue anyway?',
+          default: false,
+        };
+
+        const { proceed } = await inquirer.prompt<{ proceed: boolean }>([
+          question,
+        ]);
+
+        !proceed && process.exit(1);
+      }
     }
   }
 }
