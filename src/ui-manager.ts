@@ -45,7 +45,12 @@ export class UiManager {
       this.batchMaxNameWidth - batchDescriptor.displayName.length;
     const title: string = batchDescriptor.displayName;
 
+    console.log('printBatchHeader 1', ansiEscapes.cursorHide);
+
     process.stdout.write(ansiEscapes.cursorHide);
+
+    console.log('printBatchHeader 2');
+
     console.log(
       boxen(title, {
         padding: {
@@ -58,9 +63,16 @@ export class UiManager {
         borderStyle: boxen.BorderStyle.Round,
       }),
     );
+
+    console.log('printBatchHeader 3');
+
     process.stdout.write(ansiEscapes.cursorSavePosition);
 
+    console.log('printBatchHeader 4');
+
     this.batchMulti = new MultiProgress(process.stderr);
+
+    console.log('printBatchHeader 5');
   }
 
   printBatchFooter(results: JobDone[]): void {

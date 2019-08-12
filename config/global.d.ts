@@ -39,10 +39,6 @@ declare module 'rollup-plugin-sourcemaps' {
   const plugin: RollupPluginImpl;
   export default plugin;
 }
-declare module 'rollup-plugin-node-resolve' {
-  const plugin: RollupPluginImpl;
-  export default plugin;
-}
 declare module 'rollup-plugin-commonjs' {
   const plugin: RollupPluginImpl;
   export default plugin;
@@ -54,10 +50,6 @@ declare module 'rollup-plugin-replace' {
 declare module 'rollup-plugin-uglify' {
   const uglify: RollupPluginImpl;
   export { uglify };
-}
-declare module 'rollup-plugin-terser' {
-  const terser: RollupPluginImpl;
-  export { terser };
 }
 
 // =====================∫

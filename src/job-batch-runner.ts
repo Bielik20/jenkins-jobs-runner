@@ -9,15 +9,23 @@ export class JobBatchRunner {
   constructor(private jenkins: JenkinsRxJs) {}
 
   async runBatches(jobBatchDescriptors: JobBatchDescriptor[]): Promise<void> {
+    console.log('bielik 1');
+
     const uiManager = new UiManager(jobBatchDescriptors);
+
+    console.log('bielik 2');
 
     for (const batchDescriptor of jobBatchDescriptors) {
       uiManager.printBatchHeader(batchDescriptor);
+
+      console.log('bielik -loop 1');
 
       const results: JobDone[] = await this.executeBatchJobs(
         batchDescriptor,
         uiManager,
       );
+
+      console.log('bielik -loop 2');
 
       uiManager.printBatchFooter(results);
       this.ensureSuccess(results, uiManager);
