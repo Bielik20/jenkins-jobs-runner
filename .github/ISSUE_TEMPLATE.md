@@ -17,7 +17,7 @@
 
 <!-- Having a real demo that demonstrates your issue  -->
 
-[issue demo](https://codesandbox.io/)
+[issue demo](https://stackblitz.com/)
 
 ### Expected behaviour
 

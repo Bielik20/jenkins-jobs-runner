@@ -1,11 +1,11 @@
 {
   "name": "jenkins-jobs-runner",
   "version": "1.0.1",
-  "description": "A library for executing jenkins jobs in parralel in CLI",
+  "description": "A library for executing jenkins jobs in parallel in CLI",
   "keywords": [
     "jenkins",
     "job",
-    "parralel",
+    "parallel",
     "cli"
   ],
   "main": "./bundles/index.umd.js",
@@ -29,7 +29,8 @@
     "prebuild": "npm run cleanup && npm run verify",
     "build": "tsc && tsc --target es2018 --outDir dist/esm2015 && rollup -c config/rollup.config.js && rollup -c config/rollup.config.js --environment NODE_ENV:production",
     "postbuild": "node scripts/copy && npm run size",
-    "docs": "typedoc -p . --theme minimal --target 'es6' --excludeNotExported --excludePrivate --ignoreCompilerErrors --exclude \"**/src/**/__tests__/*.*\" --out docs src/",
+    "docs": "shx rm -rf docs && typedoc --theme minimal --mode file src/index.ts --target 'es6' --excludeNotExported --excludePrivate --ignoreCompilerErrors --exclude \"**/src/**/*.spec.*\" --out docs",
+    "deploy-docs": "npm run docs && ts-node scripts/gh-pages-publish",
     "test": "jest -c ./config/jest.config.js",
     "test:watch": "npm t -- --watch",
     "test:coverage": "npm t -- --coverage",
@@ -39,7 +40,7 @@
     "commit": "git-cz",
     "style": "npm run format -- --list-different && npm run lint",
     "style:fix": "npm run format:fix && npm run lint:fix",
-    "format": "prettier \"**/*.{ts,tsx,js,jsx,css,scss,sass,less,md}\"",
+    "format": "prettier \"src/**/*.{ts,tsx,js,jsx,css,scss,sass,less,md}\"",
     "format:fix": "npm run format -- --write",
     "lint": "tslint --project tsconfig.json --format codeFrame",
     "lint:fix": "npm run lint -- --fix",
@@ -76,7 +77,8 @@
       ]
     },
     "ignore": [
-      "**/dist/**/*"
+      "**/dist/**/*",
+      "**/docs/**/*"
     ]
   },
   "peerDependencies": {
@@ -104,6 +106,7 @@
     "@types/node": "12.7.1",
     "@types/prettier": "1.15.2",
     "@types/progress": "2.0.3",
+    "@types/shelljs": "0.8.5",
     "@types/webpack-config-utils": "2.3.0",
     "brotli-size": "0.0.3",
     "commitizen": "3.0.5",
@@ -123,16 +126,18 @@
     "rollup-plugin-replace": "2.1.0",
     "rollup-plugin-sourcemaps": "0.4.2",
     "rollup-plugin-uglify": "6.0.0",
+    "shelljs": "0.8.3",
     "shx": "0.3.2",
     "standard-version": "4.4.0",
     "ts-jest": "23.10.5",
+    "ts-node": "8.3.0",
     "tslib": "1.9.3",
     "tslint": "5.12.0",
     "tslint-config-prettier": "1.17.0",
     "tslint-config-standard": "8.0.1",
     "tslint-etc": "1.2.12",
     "tslint-react": "3.6.0",
-    "typedoc": "0.13.0",
+    "typedoc": "0.15.0",
     "typescript": "3.2.2",
     "typescript-tslint-plugin": "0.2.1",
     "webpack-config-utils": "2.3.1"
